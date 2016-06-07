@@ -1,0 +1,111 @@
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>Spring Application</display-name>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:/META-INF/configuration/applicationContext.xml
+			classpath*:/META-INF/configuration/applicationContext-dao.xml
+			<!-- classpath*:/META-INF/configuration/applicationContext-push.xml
+			classpath*:/META-INF/configuration/applicationContext-redis.xml
+			classpath*:/META-INF/configuration/applicationContext-mongo.xml
+			classpath*:/META-INF/configuration/applicationContext-jms.xml
+			classpath*:/META-INF/configuration/applicationContext-schedule.xml -->
+		</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/application-api.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+		<url-pattern>*.do</url-pattern>    
+	</servlet-mapping>
+	
+	<!-- 
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+   -->
+   
+	<filter>
+        <filter-name>loggingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CommonsRequestLoggingFilter</filter-class>
+        <init-param>
+            <param-name>includeQueryString</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>maxPayloadLength</param-name>
+            <param-value>500</param-value>
+        </init-param>
+        <init-param>
+            <param-name>includeClientInfo</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>includePayload</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+     <filter-mapping>
+        <filter-name>loggingFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+    
+	<!-- <filter>
+		<filter-name>securityFilter</filter-name>
+        <filter-class>com.telenavsoftware.snapmatch.security.authentication.SecurityFilter</filter-class>
+	</filter>
+ 	<filter-mapping>
+        <filter-name>securityFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+     -->
+    <filter>  
+        <filter-name>CharacterEncodingFilter</filter-name>  
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+        <init-param>  
+            <param-name>encoding</param-name>  
+            <param-value>utf-8</param-value>  
+        </init-param>  
+        <init-param>  
+            <param-name>forceEncoding</param-name>  
+            <param-value>true</param-value>  
+        </init-param>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>CharacterEncodingFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>  
+    
+    <!-- Authority filter
+	<filter>
+		<filter-name>urlLoginFilter</filter-name>
+		<filter-class>
+			com.telenavsoftware.snapmatch.filter.UrlLoginFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>urlLoginFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping> -->
+	
+</web-app>
