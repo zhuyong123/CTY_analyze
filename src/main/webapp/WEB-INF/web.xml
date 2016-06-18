@@ -5,10 +5,12 @@
 
 	<display-name>Spring Application</display-name>
 	
+	<!--监听器 用于加载Spring应用上下文配置文件  -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
+	<!-- 指定Spring应用上下文配置文件所在位置 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -22,9 +24,11 @@
 		</param-value>
 	</context-param>
 
+	<!-- CenterDispatcherServlet用于加载Web MVC框架配置文件 -->
 	<servlet>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 指定Web MVC框架配置文件所在位置，在SpringMVC中如果不指定，默认为${dispatcherServletName}-servlet.xml文件 -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/application-api.xml</param-value>
@@ -32,9 +36,14 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<!-- 指定URL映射分发器 -->
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>*.do</url-pattern>    
 	</servlet-mapping>
 	

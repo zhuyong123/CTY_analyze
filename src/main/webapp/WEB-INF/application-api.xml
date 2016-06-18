@@ -12,13 +12,13 @@
 
 	<context:spring-configured />
 
-	<context:component-scan base-package="com.yinbo.tenement" />
+	<context:component-scan base-package="com.dev.cty" />
 	<mvc:annotation-driven />
 
 	<task:annotation-driven executor="executor" />
 	<task:executor id="executor" pool-size="10" />
 
-	<!-- <bean name="/welcome.htm" class="com.telenavsoftware.snapmatch.admin.WelcomeController" /> -->
+	 <bean name="/welcome.do" class="com.dev.cty.admin.WelcomeController" /> 
 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- setting maximum upload size -->
