@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>社区聆听</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -39,104 +39,66 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <style type="text/css">
-        body { font-family:Lucida Sans, Lucida Sans Unicode, Arial, Sans-Serif; font-size:13px; margin:0px auto;}
-        #tabs { margin:0; padding:0; list-style:none; overflow:hidden; }
+  #tabs { margin:0; padding:0; list-style:none; overflow:hidden; }
         #tabs li { float:left; display:block; padding:5px; background-color:#bbb; margin-right:5px;}
         #tabs li a { color:#fff; text-decoration:none; }
         #tabs li.current { background-color:#e1e1e1;}
         #tabs li.current a { color:#000; text-decoration:none; }
         #tabs li a.remove { color:#f00; margin-left:10px;}
-        #content { background-color:#e1e1e1;}
-        #content p { margin: 0; padding:20px 20px 100px 20px;}
-        
-        #main { width:900px; margin:0px auto; overflow:hidden;background-color:#F6F6F6; margin-top:20px;
-             -moz-border-radius:10px;  -webkit-border-radius:10px; padding:30px;}
-        #wrapper, #doclist { float:left; margin:0 20px 0 0;}
-        #doclist { width:150px; border-right:solid 1px #dcdcdc;}
-        #doclist ul { margin:0; list-style:none;}
-        #doclist li { margin:10px 0; padding:0;}
-        #documents { margin:0; padding:0;}
-        
-        #wrapper { width:700px; margin-top:20px;}
-            
-        #header{ background-color:#F6F6F6; width:900px; margin:0px auto; margin-top:20px;
-             -moz-border-radius:10px;  -webkit-border-radius:10px; padding:30px; position:relative;}
-        #header h2 {font-size:16px; font-weight:normal; margin:0px; padding:0px;}
-
+      	#menuFrame{
+			min-height:940px;
+		}
+		.sidebar{
+			min-height:935px;
+		}
     </style>
-  <script type="text/javascript" src="jquery-1.4.min.js" ></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#documents a").click(function() {
-                addTab($(this));
-            });
-
-            $('#tabs a.tab').live('click', function() {
-                // Get the tab name
-                var contentname = $(this).attr("id") + "_content";
-
-                // hide all other tabs
-                $("#content p").hide();
-                $("#tabs li").removeClass("current");
-
-                // show current tab
-                $("#" + contentname).show();
-                $(this).parent().addClass("current");
-            });
-
-            $('#tabs a.remove').live('click', function() {
-                // Get the tab name
-                var tabid = $(this).parent().find(".tab").attr("id");
-
-                // remove tab and related content
-                var contentname = tabid + "_content";
-                $("#" + contentname).remove();
-                $(this).parent().remove();
-
-                // if there is no current tab and if there are still tabs left, show the first one
-                if ($("#tabs li.current").length == 0 && $("#tabs li").length > 0) {
-
-                    // find the first tab    
-                    var firsttab = $("#tabs li:first-child");
-                    firsttab.addClass("current");
-
-                    // get its link name and show related content
-                    var firsttabid = $(firsttab).find("a.tab").attr("id");
-                    $("#" + firsttabid + "_content").show();
-                }
-            });
-        });
-        function addTab(link) {
-            // If tab already exist in the list, return
-            if ($("#" + $(link).attr("rel")).length != 0)
-                return;
-            
-            // hide other tabs
-            $("#tabs li").removeClass("current");
-            $("#content p").hide();
-            
-            // add new tab and related content
-            $("#tabs").append("<li class='current'><a class='tab' id='" +
-                $(link).attr("rel") + "' href='#'>" + $(link).html() + 
-                "</a><a href='#' class='remove'>x</a></li>");
-
-            $("#content").append("<p id='" + $(link).attr("rel") + "_content'>" + 
-                $(link).attr("title") + "</p>");
-            
-            // set the newly added tab as current
-            $("#" + $(link).attr("rel") + "_content").show();
-        }
-    </script>
+ <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+  <script type="text/javascript">
+     $(document).ready(function(){
+      var link="http://114.55.141.110:8080";
+      $("#tabs li:eq(0) a:eq(0)").attr("href",link);
+      $("#menuFrame").attr("src",link);
+       $(".sidebar-menu a").click(function(){
+         addTab($(this));
+       });
+     });
+     function addTab(link){
+      var rep=false;
+       if("#"==$(link).attr("href")){
+         return;
+       }
+       $("#tabs li").each(function(){
+         if($(this).children(0).attr("href")==$(link).attr("href")){
+           rep=true;
+         }
+       });
+       if (!rep) {
+          $("#tabs").append("<li class='current'><a class='tab' target='menuFrame' href='"+$(link).attr("href")+"'>"+$(link).html()+"</a><a href='#' class='remove'>x</a></li>");
+       }
+       
+       $("#tabs .remove").click(function(){
+         var ind = $(this).parent().index();
+         if (ind>0) {
+            var url=$("#tabs li:eq("+(ind-1)+") a:eq(0)").attr("href")+"?n="+ Math.random();
+            $("#menuFrame").attr("src",url);
+         }else{
+            $("#menuFrame").attr("src",$("#tabs li:eq(0) a:eq(0)").attr("href"));
+         }
+         $(this).parent().remove();
+       });
+     }
+  </script>
   
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<header class="main-header"><!--头部  -->
+<div class="wrapper">
+ 	<header class="main-header"><!--头部  -->
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>聆</b>听</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>社区</b>聆听</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -279,20 +241,9 @@
       </div>
     </nav>
   </header>
-  
-  <aside class="main-sidebar"><!--左边菜单  -->
+  <aside class="main-sidebar" ><!--左边菜单  -->
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      <!-- Sidebar user panel -->
-<!--登录用户信息       <div class="user-panel">
-        <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div> -->
       
       <!-- search form -->
       <form action="#" method="get" class="sidebar-form">
@@ -311,85 +262,47 @@
         
         <li class="active treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-dashboard"></i> <span>系统功能</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
+          
           <ul class="treeview-menu">
-            <li class="active"><a href="index.html" target="menuFrame"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+           <li class="treeview">
+	          <a href="showReports.do" target="menuFrame">
+	            <i class="fa fa-dashboard"></i> <span>维护报表信息</span>
+	          </a>
+	          
+	        </li>
           </ul>
         </li>
-         <li class="treeview">
+        <li class="treeview">
 	          <a href="#">
-	            <i class="fa fa-files-o"></i>
-	            <span class="label label-primary pull-right">4</span>
+	            <i class="fa fa-pie-chart"></i>
+	            <span>业务报表</span>
+	            <i class="fa fa-angle-left pull-right"></i>
 	          </a>
 	          <ul class="treeview-menu">
 	            <li><a href="pages/layout/top-nav.html" target="menuFrame"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
 	            <li><a href="pages/layout/boxed.html" target="menuFrame"><i class="fa fa-circle-o"></i> Boxed</a></li>
 	            <li><a href="pages/layout/fixed.html" target="menuFrame"><i class="fa fa-circle-o"></i> Fixed</a></li>
 	          </ul>
-	        </li>
-        <c:forEach items="${list }" var="l">
-	        <li class="treeview">
-	          <a href="#">
-	            <i class="fa fa-files-o"></i>
-	            <span>${l }</span>
-	            <span class="label label-primary pull-right">4</span>
-	          </a>
-	          <ul class="treeview-menu">
-	            <li><a href="pages/layout/top-nav.html" target="menuFrame"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-	            <li><a href="pages/layout/boxed.html" target="menuFrame"><i class="fa fa-circle-o"></i> Boxed</a></li>
-	            <li><a href="pages/layout/fixed.html" target="menuFrame"><i class="fa fa-circle-o"></i> Fixed</a></li>
-	          </ul>
-	        </li>
-        </c:forEach>
-       
+	    </li>
+      </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
 	<div class="content-wrapper">
-		  <section class="content" height="800">
-		
-		  	<iframe id="menuFrame" name="menuFrame" src="http://114.55.141.110:8080/" style="overflow:visible;" scrolling="yes" frameborder="no" height="800" width="100%">
-		  		  <div id="wrapper">
-				        <ul id="tabs">
-				            <!-- Tabs go here -->
-				        </ul>
-				        <div id="content">
-				            <!-- Tab content goes here -->
-				        </div>
-				
-				   </div>
-				   <div id="main">
-					    <div id="doclist">
-					        <h2>Documents</h2>
-				
-					        <ul id="documents">
-					            <li><a href="#" rel="Document1" title="This is the content of Document1">Document1</a></li>
-					            <li><a href="#" rel="Document2" title="This is the content of Document2">Document2</a></li>
-					            <li><a href="#" rel="Document3" title="This is the content of Document3">Document3</a></li>
-					            <li><a href="#" rel="Document4" title="This is the content of Document4">Document4</a></li>
-					            <li><a href="#" rel="Document5" title="This is the content of Document5">Document5</a></li>
-				
-					        </ul>
-					    </div>
-					    <div id="wrapper">
-					        <ul id="tabs">
-					            <!-- Tabs go here -->
-					        </ul>
-					        <div id="content">
-					            <!-- Tab content goes here -->
-					        </div>
-				
-					    </div>
-				  	</div>
-		  
-		  	</iframe>
-		  </section>
+	<div id="tabb">
+         <ul id="tabs">
+         <li class="current"><a href="" target="menuFrame">saiku</a></li>
+         </ul>
+         <div id="content">
+    </div>
+        
+      </div>
+ 		<iframe id="menuFrame" src="" name="menuFrame" width="100%">
+		</iframe> 
 	</div>
- <div class="overlay">
-  <i class="fa fa-refresh fa-spin"></i>
-</div>
+ </div>
 <%--   <%@ include file="biaoge.jsp" %> --%>
 <!-- ./wrapper -->
 
