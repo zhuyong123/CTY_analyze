@@ -5,7 +5,7 @@ import java.util.List;
 import com.dev.cty.dto.ReportDto;
 import com.dev.cty.entity.Report;
 
-public interface ILoginService {
+public interface IReportService {
 
 	List<Report> getReports();
 

@@ -177,7 +177,7 @@ function login(){
 	//document.getElementById("form1").submit();
  $.ajax({                                                                      
 		  type:'post',                                                            
-		  url: '${ctx}/logins.do',                                                               
+		  url: '${ctx}/login.do',                                                               
 		  dataType: 'json',
 		  async:false,    
 		 data: {userName:$('#userName').val(),password:$('#password').val()},                                                 

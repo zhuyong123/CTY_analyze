@@ -258,7 +258,7 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION 导航</li>
+        <li class="header">导航</li>
         
         <li class="active treeview">
           <a href="#">
@@ -268,7 +268,7 @@
           <ul class="treeview-menu">
            <li class="treeview">
 	          <a href="showReports.do" target="menuFrame">
-	            <i class="fa fa-dashboard"></i> <span>维护报表信息</span>
+	            <i class="fa fa-dashboard"></i> <span>报表管理</span>
 	          </a>
 	          
 	        </li>

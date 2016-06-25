@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 
 import com.dev.cty.dto.ReportDto;
 import com.dev.cty.entity.Report;
-import com.dev.cty.service.ILoginService;
+import com.dev.cty.service.IReportService;
 
 @Service
-public class LoginServiceImpl implements ILoginService {
+public class ReportServiceImpl implements IReportService {
 
 	@Override
 	public List<Report> getReports() {
