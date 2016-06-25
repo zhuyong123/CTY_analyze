@@ -281,9 +281,9 @@
 	            <i class="fa fa-angle-left pull-right"></i>
 	          </a>
 	          <ul class="treeview-menu">
-	            <li><a href="pages/layout/top-nav.html" target="menuFrame"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-	            <li><a href="pages/layout/boxed.html" target="menuFrame"><i class="fa fa-circle-o"></i> Boxed</a></li>
-	            <li><a href="pages/layout/fixed.html" target="menuFrame"><i class="fa fa-circle-o"></i> Fixed</a></li>
+	          	<c:forEach items="${reports }" var="rep">
+	          		<li><a href="${rep.repUrl }" target="menuFrame"><i class="fa fa-circle-o"></i>${rep.repName }</a></li>
+	          	</c:forEach>
 	          </ul>
 	    </li>
       </ul>

@@ -2,6 +2,7 @@ package com.dev.cty.service;
 
 import java.util.List;
 
+import com.dev.cty.dto.ReportDto;
 import com.dev.cty.entity.Report;
 
 public interface ILoginService {
@@ -10,6 +11,10 @@ public interface ILoginService {
 
 	Report getReport(String repName);
 
-	int addReport(Report rep);
+	int addReport(ReportDto repDto);
+
+	int editReport(ReportDto repDto);
+
+	int deleteReport(String repName);
 
 }

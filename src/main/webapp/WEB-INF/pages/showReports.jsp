@@ -25,7 +25,7 @@
 			<td>${rep.repDesc }</td>
 			<td>${rep.createDate }</td>
 			<td>${rep.createPerson }</td>
-			<td><a href="edit.do?repName=${rep.repName }" target="menuFrame">修改</a>||<a href="delete.do?repName=${rep.repName }" target="menuFrame">删除</a></td>
+			<td><a href="editPage.do?repName=${rep.repName }" target="menuFrame">修改</a>||<a href="deleteReport.do?repName=${rep.repName }" target="menuFrame">删除</a></td>
 		</tr>	          
 	</c:forEach>
 </table>	            
