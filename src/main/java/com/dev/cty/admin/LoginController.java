@@ -27,7 +27,9 @@ public class LoginController{
 	@RequestMapping("login.do")
 	protected ModelAndView toLogin(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String userName = request.getParameter("userName");
+		request.getSession().setAttribute("userName", userName);
 		if ("admin".equals(userName)) {
+			
 			response.getWriter().print("true");
 		}else {
 			response.getWriter().print("false");
@@ -37,5 +39,15 @@ public class LoginController{
 		return model;
 	}
 
+	@Autowired
+	IReportService irs;
+	@RequestMapping("index.do")
+	protected ModelAndView toIndex(HttpServletRequest request,HttpServletResponse response){
+		
+		List<Report> reports = irs.getReports();
+		request.setAttribute("reports", reports);
+		ModelAndView model = new ModelAndView("index");
+		return model;
+	}
 	
 }

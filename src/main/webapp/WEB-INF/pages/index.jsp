@@ -58,7 +58,7 @@
       var link="http://114.55.141.110:8080";
       $("#tabs li:eq(0) a:eq(0)").attr("href",link);
       $("#menuFrame").attr("src",link);
-       $(".sidebar-menu a").click(function(){
+       $(".main-sidebar a").click(function(){
          addTab($(this));
        });
      });
@@ -72,7 +72,7 @@
            rep=true;
          }
        });
-       if (!rep) {
+       if (!rep) { 
           $("#tabs").append("<li class='current'><a class='tab' target='menuFrame' href='"+$(link).attr("href")+"'>"+$(link).html()+"</a><a href='#' class='remove'>x</a></li>");
        }
        
@@ -83,7 +83,7 @@
             $("#menuFrame").attr("src",url);
          }else{
             $("#menuFrame").attr("src",$("#tabs li:eq(0) a:eq(0)").attr("href"));
-         }
+         }u
          $(this).parent().remove();
        });
      }
@@ -267,23 +267,21 @@
           
           <ul class="treeview-menu">
            <li class="treeview">
-	          <a href="showReports.do" target="menuFrame">
-	            <i class="fa fa-dashboard"></i> <span>报表管理</span>
+	          <a href="ReportController.do?method=showReports" target="menuFrame">
+	            <i class="fa fa-dashboard"></i> <span  id="ye">报表管理</span>
 	          </a>
 	          
 	        </li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview" id="showReports">
 	          <a href="#">
 	            <i class="fa fa-pie-chart"></i>
-	            <span>业务报表</span>
+	            <span >业务报表</span>
 	            <i class="fa fa-angle-left pull-right"></i>
 	          </a>
 	          <ul class="treeview-menu">
-	          	<c:forEach items="${reports }" var="rep">
-	          		<li><a href="${rep.repUrl }" target="menuFrame"><i class="fa fa-circle-o"></i>${rep.repName }</a></li>
-	          	</c:forEach>
+
 	          </ul>
 	    </li>
       </ul>
@@ -305,7 +303,24 @@
  </div>
 <%--   <%@ include file="biaoge.jsp" %> --%>
 <!-- ./wrapper -->
-
+<script type="text/javascript">
+function shows(){
+	$("#showReports ul li").remove();
+	$.ajax({
+		type:"post",
+		url:"ReportController.do?method=getReports",
+		dataType: 'json',
+		async:false,
+		data: {},
+		success:function(data){
+			$.each(data,function(i){
+				$("#showReports ul").append("<li><a href="+data[i].repUrl+" target='menuFrame'><i class='fa fa-circle-o'></i>"+data[i].repName+"</a></li>");
+			});
+		}
+		  
+	});
+}
+</script>
 <!-- jQuery 2.2.0 -->
 <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <!-- jQuery UI 1.11.4 -->

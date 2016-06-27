@@ -1,6 +1,8 @@
 package com.dev.cty.dto;
 
-public class ReportDto {
+import java.io.Serializable;
+
+public class ReportDto implements Serializable {
 	private String repName;
 	private String repUrl;
 	private String repDesc;

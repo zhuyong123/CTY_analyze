@@ -157,6 +157,7 @@ public class BaseDao<T> {
 		SqlParameterSource ps = new BeanPropertySqlParameterSource(obj);
 		KeyHolder key = new GeneratedKeyHolder();
 		namedParameterJdbcOperations.update(sql, ps, key);
+		System.out.println("key.getKey()"+key.getKey());
 		if (key.getKey() != null) {
 			return key.getKey().intValue();
 		} else {

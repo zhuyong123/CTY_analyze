@@ -55,7 +55,7 @@
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form class="form-horizontal" action="addReport.do" method="post">
+		<form class="form-horizontal" action="ReportController.do?method=addReport" method="post">
 			<div class="box-body">
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">报表名：</label>
@@ -75,7 +75,7 @@
 					<label for="inputPassword3" class="col-sm-2 control-label">报表描述：</label>
 
 					<div class="col-xs-5">
-						<input type="text" class="form-control" name="repDesc">
+						<textarea class="form-control" name="repDesc"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
@@ -83,7 +83,7 @@
 
 					<div class="col-xs-5">
 						<input type="text" class="form-control" name="createPerson"
-							placeholder="${session.userName }" readonly>
+							value="${sessionScope.userName }" readonly>
 					</div>
 				</div>
 			</div>

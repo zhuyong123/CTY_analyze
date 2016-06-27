@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	操作失败！<a href="showReports.do">返回</a>
+	操作失败！<a href="ReportController.do?method=showReports">返回</a>
 </body>
 </html>

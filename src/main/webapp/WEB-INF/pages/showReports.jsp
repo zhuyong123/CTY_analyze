@@ -46,6 +46,12 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+  <script type="text/javascript">
+  	$(function(){
+  		window.parent.shows();
+  	});
+  </script>
 </head>
 <body>
 	<!-- /.box -->
@@ -84,9 +90,9 @@
 							<td>${rep.createDate }</td>
 							<td>${rep.createPerson }</td>
 							<td><div class="tools">
-									<a href="editPage.do?repName=${rep.repName }"><i
-										class="fa fa-edit"></i> </a> <a
-										href="deleteReport.do?repName=${rep.repName }"><i
+									<a href="ReportController.do?method=editPage&repName=${rep.repName }"><i
+										class="fa fa-edit"></i> </a> 
+									<a	href="ReportController.do?method=deleteReport&repName=${rep.repName }"><i
 										class="fa fa-trash-o"></i></a>
 								</div></td>
 						</tr>
@@ -98,7 +104,7 @@
 			
 			<!-- /.box-body -->
 			<div class="box-footer clearfix no-border">
-				<a href="addReportPage.do">
+				<a href="ReportController.do?method=addReportPage">
 					<button type="button" class="btn btn-default pull-right">
 						<i class="fa fa-plus"></i> Add item
 					</button>

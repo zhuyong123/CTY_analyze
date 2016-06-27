@@ -53,7 +53,7 @@
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form class="form-horizontal" action="editReport.do" method="post">
+		<form class="form-horizontal" action="ReportController.do?method=editReport" method="post">
 			<div class="box-body">
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">报表名：</label>
@@ -73,7 +73,7 @@
 					<label for="inputPassword3" class="col-sm-2 control-label">报表描述：</label>
 
 					<div class="col-xs-5">
-						<input type="text" class="form-control" name="repDesc" value="${rep.repDesc }">
+						<textarea class="form-control" name="repDesc" >${rep.repDesc }</textarea>
 					</div>
 				</div>
 			</div>
